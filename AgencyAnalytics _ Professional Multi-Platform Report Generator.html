@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<!-- saved from url=(0190)file:///C:/Users/ASUS%20TUF/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/6BFEDF4B649B4F210E15155E0ECC77E9E0926580/transfers/2026-05/scaleupanalytics.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgencyAnalytics | Professional Multi-Platform Report Generator</title>
+    
+    <link href="./AgencyAnalytics _ Professional Multi-Platform Report Generator_files/css2" rel="stylesheet">
+    <link rel="stylesheet" href="./AgencyAnalytics _ Professional Multi-Platform Report Generator_files/all.min.css">
+    <script src="./AgencyAnalytics _ Professional Multi-Platform Report Generator_files/chart.js.download"></script>
+    <script src="./AgencyAnalytics _ Professional Multi-Platform Report Generator_files/html2pdf.bundle.min.js.download"></script>
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #111827 100%);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --radius: 12px;
+            --print-bg: #ffffff;
+            --print-text: #1e293b;
+            --print-border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .btn {
+            padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer;
+            font-weight: 600; transition: all 0.2s; display: inline-flex; 
+            align-items: center; gap: 8px; font-size: 0.9rem;
+        }
+        .btn-primary { background: var(--accent); color: white; box-shadow: 0 4px 15px var(--accent-glow); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+        .btn-outline { background: transparent; border: 1px solid var(--glass-border); color: var(--text-muted); }
+        .btn-outline:hover { border-color: var(--accent); color: white; }
+        .btn-success { background: var(--success); color: white; }
+        .btn-warning { background: var(--warning); color: white; }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            min-height: 100vh;
+        }
+
+        aside {
+            padding: 25px;
+            overflow-y: auto;
+            border-right: 1px solid var(--glass-border);
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.6);
+            z-index: 10;
+        }
+
+        .input-section { margin-bottom: 25px; }
+        .input-section h3 { 
+            font-size: 0.9rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: var(--text-muted); 
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px; }
+        input, select, textarea {
+            width: 100%; padding: 10px; background: rgba(0,0,0,0.3); 
+            border: 1px solid var(--glass-border);
+            border-radius: 6px; color: white; outline: none; transition: 0.2s;
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+        textarea { resize: vertical; min-height: 60px; }
+
+        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .toggle-label {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 13px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .toggle-switch.active { background: var(--accent); }
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .toggle-switch.active .toggle-slider { left: 27px; }
+
+        /* Platform Selection */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .platform-card {
+            padding: 12px;
+            background: rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .platform-card:hover { border-color: var(--accent); }
+        .platform-card.selected { 
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--accent);
+        }
+        .platform-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+        .platform-info {
+            flex: 1;
+        }
+        .platform-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .platform-status {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Color coding for platforms */
+        .facebook { background: #1877f2; }
+        .instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .twitter { background: #1da1f2; }
+        .linkedin { background: #0077b5; }
+        .youtube { background: #ff0000; }
+        .tiktok { background: #000000; }
+
+        main { padding: 40px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
+
+        .toolbar {
+            width: 100%; max-width: 210mm; display: flex; justify-content: space-between; 
+            align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+        }
+
+        .report-sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            color: var(--print-text);
+            padding: 20mm;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .report-header { 
+            border-bottom: 2px solid var(--accent); 
+            padding-bottom: 20px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end; 
+        }
+        .client-name { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.5rem; 
+            color: #1e293b; 
+            line-height: 1; 
+        }
+        .report-meta { text-align: right; font-size: 0.9rem; color: #64748b; }
+
+        .section-title { 
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            color: #334155; 
+            margin: 30px 0 15px 0; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            page-break-after: avoid;
+        }
+        .section-title i { color: var(--accent); }
+
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-row { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+            gap: 15px; 
+            margin-bottom: 30px; 
+        }
+        .kpi-card { 
+            background: #f8fafc; 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px solid #e2e8f0;
+            page-break-inside: avoid;
+        }
+        .kpi-label { 
+            font-size: 0.75rem; 
+            color: #64748b; 
+            text-transform: uppercase; 
+            font-weight: 600; 
+        }
+        .kpi-value { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            color: #0f172a; 
+            margin: 5px 0; 
+        }
+        .kpi-trend { font-size: 0.8rem; display: flex; align-items: center; gap: 4px; }
+        .trend-up { color: var(--success); }
+        .trend-down { color: var(--danger); }
+        .trend-neutral { color: #64748b; }
+
+        .insights-box { 
+            background: #f0f9ff; 
+            border-left: 4px solid var(--accent); 
+            padding: 20px; 
+            border-radius: 0 8px 8px 0; 
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+        .insights-text p { margin-bottom: 10px; line-height: 1.6; font-size: 0.95rem; }
+        .insights-text strong { color: #0f172a; }
+
+        .platform-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #fafbfc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            page-break-inside: avoid;
+        }
+
+        .platform-section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .platform-section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .platform-section-title {
+            flex: 1;
+        }
+
+        .platform-section-title h3 {
+            font-size: 1.3rem;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .platform-section-title p {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .data-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 0.9rem; 
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+        .data-table th { 
+            text-align: left; 
+            padding: 12px; 
+            background: #f1f5f9; 
+            color: #475569; 
+            font-weight: 600; 
+            border-bottom: 2px solid #e2e8f0; 
+        }
+        .data-table td { 
+            padding: 12px; 
+            border-bottom: 1px solid #e2e8f0; 
+            color: #334155; 
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+
+        .chart-wrapper { 
+            height: 300px; 
+            width: 100%; 
+            margin-bottom: 30px; 
+            border: 1px solid #e2e8f0; 
+            padding: 15px; 
+            border-radius: 8px;
+            page-break-inside: avoid;
+        }
+
+        .comparison-disabled-notice {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+
+        @media (max-width: 1200px) {
+            .app-container { grid-template-columns: 1fr; }
+            aside { height: auto; position: relative; border-bottom: 1px solid var(--glass-border); }
+            .report-sheet { width: 100%; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media print {
+            body { background: white; }
+            aside, .toolbar { display: none; }
+            main { padding: 0; }
+            .report-sheet { box-shadow: none; width: 100%; min-height: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <aside>
+            <div style="margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-chart-pie" style="font-size: 1.5rem; color: var(--accent);"></i>
+                <h1 style="font-size: 1.2rem; font-weight: 700;">AgencyAnalytics Pro</h1>
+            </div>
+
+            <form id="reportForm">
+                <!-- Report Details -->
+                <div class="input-section glass" style="padding: 15px; border-radius: 8px;">
+                    <h3><i class="fa-solid fa-file-lines"></i> Report Details</h3>
+                    <div class="form-group">
+                        <label>Client Name</label>
+                        <input type="text" id="clientName" placeholder="e.g. Acme Corp" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Campaign Name</label>
+                        <input type="text" id="campaignName" placeholder="e.g. Q3 Growth Strategy" required="">
+                    </div>
+                </div>
+
+                <!-- Platform Selection -->
+                <div class="input-section glass" style="padding: 15px; border-radius: 8px;">
+                    <h3><i class="fa-solid fa-share-nodes"></i> Select Platforms</h3>
+                    <div class="platform-grid" id="platformGrid"><div class="platform-card" data-platform-id="facebook">
+                    <div class="platform-icon" style="background: #1877f2">
+                        <i class="fa-brands fa-facebook"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">Facebook</div>
+                        <div class="platform-status">Not selected</div>
+                    </div>
+                </div><div class="platform-card" data-platform-id="instagram">
+                    <div class="platform-icon" style="background: #E4405F">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">Instagram</div>
+                        <div class="platform-status">Not selected</div>
+                    </div>
+                </div><div class="platform-card" data-platform-id="twitter">
+                    <div class="platform-icon" style="background: #000000">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">Twitter/X</div>
+                        <div class="platform-status">Not selected</div>
+                    </div>
+                </div><div class="platform-card" data-platform-id="linkedin">
+                    <div class="platform-icon" style="background: #0077b5">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">LinkedIn</div>
+                        <div class="platform-status">Not selected</div>
+                    </div>
+                </div><div class="platform-card" data-platform-id="youtube">
+                    <div class="platform-icon" style="background: #ff0000">
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">YouTube</div>
+                        <div class="platform-status">Not selected</div>
+                    </div>
+                </div><div class="platform-card" data-platform-id="tiktok">
+                    <div class="platform-icon" style="background: #000000">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">TikTok</div>
+                        <div class="platform-status">Not selected</div>
+                    </div>
+                </div></div>
+                </div>
+
+                <!-- Comparison Toggle -->
+                <div class="input-section glass" style="padding: 15px; border-radius: 8px;">
+                    <h3><i class="fa-solid fa-code-compare"></i> Comparison Settings</h3>
+                    <div class="toggle-container">
+                        <div class="toggle-label">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <span>Enable Period Comparison</span>
+                        </div>
+                        <div class="toggle-switch" id="comparisonToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: -10px;">
+                        Compare current metrics with a previous period
+                    </p>
+                </div>
+
+                <!-- Current Period -->
+                <div class="input-section glass" style="padding: 15px; border-radius: 8px;">
+                    <h3><i class="fa-solid fa-calendar-check"></i> Current Period</h3>
+                    <div class="metric-grid">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="date" id="p1_start" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="date" id="p1_end" required="">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Previous Period (Conditional) -->
+                <div class="input-section glass" id="previousPeriodSection" style="padding: 15px; border-radius: 8px; display: none;">
+                    <h3><i class="fa-solid fa-calendar"></i> Previous Period</h3>
+                    <div class="metric-grid">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="date" id="p2_start">
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="date" id="p2_end">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metrics Input Container -->
+                <div id="metricsInputContainer"></div>
+
+                <!-- Actions -->
+                <div style="display: flex; gap: 10px; position:sticky; bottom:0; background:var(--bg-dark); padding:15px 0; border-top: 1px solid var(--glass-border);">
+                    <button type="button" class="btn btn-outline" id="btnDemo">
+                        <i class="fa-solid fa-flask"></i> Demo
+                    </button>
+                    <button type="submit" class="btn btn-primary" style="flex:1;">
+                        <i class="fa-solid fa-rotate"></i> Update Report
+                    </button>
+                </div>
+            </form>
+        </aside>
+
+        <main>
+            <div class="toolbar">
+                <span style="color:var(--text-muted); font-size:0.9rem;">
+                    <i class="fa-solid fa-eye"></i> Live Preview
+                </span>
+                
+                <button class="btn btn-primary" id="btnDownload">
+                    <i class="fa-solid fa-file-pdf"></i> Download PDF
+                </button>
+            </div>
+
+            <div id="reportSheet" class="report-sheet">
+                <div class="report-header">
+                    <div>
+                        <div class="client-name" id="dispClient">Client Name</div>
+                        <div style="font-size:1.1rem; color:#64748b; margin-top:5px;" id="dispCampaign">Campaign Name</div>
+                    </div>
+                    <div class="report-meta">
+                        <div><strong>Report Period:</strong> <span id="dispRange1">TBD</span></div>
+                        <div id="comparisonMetaLine"><strong>Comparison:</strong> <span id="dispRange2">TBD</span></div>
+                        <div style="margin-top:5px; font-size:0.8rem;">Generated: <span id="genDate">2/5/2026</span></div>
+                    </div>
+                </div>
+
+                <div id="platformBadgesContainer" style="margin-bottom: 20px;"></div>
+
+                <div class="section-title"><i class="fa-solid fa-lightbulb"></i> Executive Summary &amp; Insights</div>
+                <div class="insights-box">
+                    <div class="insights-text" id="aiInsights">
+                        <p>Select platforms, enter data, and click "Update Report" to generate automated insights...</p>
+                    </div>
+                </div>
+
+                <div id="comparisonDisabledNotice"></div>
+
+                <div class="section-title"><i class="fa-solid fa-chart-pie"></i> Overall Performance Overview</div>
+                <div class="kpi-row" id="overallKpiContainer"></div>
+
+                <div class="section-title"><i class="fa-solid fa-chart-line"></i> Cross-Platform Performance</div>
+                <div class="chart-wrapper">
+                    <canvas id="overviewChart"></canvas>
+                </div>
+
+                <div id="platformSectionsContainer"></div>
+
+                <div style="margin-top: 50px; padding-top:20px; border-top:1px solid #e2e8f0; text-align:center; font-size:0.8rem; color:#94a3b8;">
+                    Professional Multi-Platform Analytics Report • Generated via AgencyAnalytics Pro
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ========================
+        // CONFIGURATION
+        // ========================
+        
+        const PLATFORMS = [
+            { 
+                id: 'facebook', 
+                name: 'Facebook', 
+                icon: 'fa-brands fa-facebook',
+                color: '#1877f2',
+                metrics: ['impressions', 'views', 'engagements', 'pageLikes', 'postEngagements', 'videoPlays', 'linkClicks', 'landingPageViews', 'adSpend']
+            },
+            { 
+                id: 'instagram', 
+                name: 'Instagram', 
+                icon: 'fa-brands fa-instagram',
+                color: '#E4405F',
+                metrics: ['impressions', 'views', 'engagements', 'followers', 'postEngagements', 'videoPlays', 'linkClicks', 'adSpend']
+            },
+            { 
+                id: 'twitter', 
+                name: 'Twitter/X', 
+                icon: 'fa-brands fa-x-twitter',
+                color: '#000000',
+                metrics: ['impressions', 'engagements', 'followers', 'linkClicks', 'videoPlays', 'adSpend']
+            },
+            { 
+                id: 'linkedin', 
+                name: 'LinkedIn', 
+                icon: 'fa-brands fa-linkedin',
+                color: '#0077b5',
+                metrics: ['impressions', 'engagements', 'followers', 'linkClicks', 'videoPlays', 'adSpend']
+            },
+            { 
+                id: 'youtube', 
+                name: 'YouTube', 
+                icon: 'fa-brands fa-youtube',
+                color: '#ff0000',
+                metrics: ['views', 'videoPlays', 'engagements', 'followers', 'adSpend']
+            },
+            { 
+                id: 'tiktok', 
+                name: 'TikTok', 
+                icon: 'fa-brands fa-tiktok',
+                color: '#000000',
+                metrics: ['views', 'videoPlays', 'engagements', 'followers', 'adSpend']
+            }
+        ];
+
+        const METRICS_CONFIG = {
+            impressions: { label: 'Impressions', icon: 'fa-eye' },
+            views: { label: 'Total Views', icon: 'fa-play' },
+            followers: { label: 'Followers', icon: 'fa-users' },
+            pageLikes: { label: 'Page Likes', icon: 'fa-heart' },
+            engagements: { label: 'Total Engagements', icon: 'fa-comments' },
+            videoPlays: { label: 'Video Plays', icon: 'fa-video' },
+            postEngagements: { label: 'Post Engagements', icon: 'fa-share' },
+            linkClicks: { label: 'Link Clicks', icon: 'fa-link' },
+            landingPageViews: { label: 'Landing Page Views', icon: 'fa-desktop' },
+            calls: { label: 'Calls', icon: 'fa-phone' },
+            messages: { label: 'Messages', icon: 'fa-envelope' },
+            adSpend: { label: 'Ad Spend', icon: 'fa-dollar-sign', isCurrency: true }
+        };
+
+        // ========================
+        // STATE
+        // ========================
+        
+        let state = {
+            selectedPlatforms: [],
+            comparisonEnabled: false,
+            platformData: {}
+        };
+
+        let chartInstances = {};
+
+        // ========================
+        // INITIALIZATION
+        // ========================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initializePlatformSelector();
+            initializeComparisonToggle();
+            setDefaultDates();
+            
+            document.getElementById('reportForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                generateReport();
+            });
+
+            document.getElementById('btnDemo').addEventListener('click', loadDemoData);
+            document.getElementById('btnDownload').addEventListener('click', downloadPDF);
+            document.getElementById('genDate').textContent = new Date().toLocaleDateString();
+        });
+
+        function initializePlatformSelector() {
+            const grid = document.getElementById('platformGrid');
+            grid.innerHTML = '';
+            
+            PLATFORMS.forEach(platform => {
+                const card = document.createElement('div');
+                card.className = 'platform-card';
+                card.dataset.platformId = platform.id;
+                card.innerHTML = `
+                    <div class="platform-icon" style="background: ${platform.color}">
+                        <i class="${platform.icon}"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">${platform.name}</div>
+                        <div class="platform-status">Not selected</div>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => togglePlatform(platform.id));
+                grid.appendChild(card);
+            });
+        }
+
+        function togglePlatform(platformId) {
+            const card = document.querySelector(`[data-platform-id="${platformId}"]`);
+            const statusEl = card.querySelector('.platform-status');
+            
+            if (state.selectedPlatforms.includes(platformId)) {
+                state.selectedPlatforms = state.selectedPlatforms.filter(id => id !== platformId);
+                card.classList.remove('selected');
+                statusEl.textContent = 'Not selected';
+            } else {
+                state.selectedPlatforms.push(platformId);
+                card.classList.add('selected');
+                statusEl.textContent = 'Selected';
+            }
+            
+            updateMetricsInputs();
+        }
+
+        function initializeComparisonToggle() {
+            const toggle = document.getElementById('comparisonToggle');
+            toggle.addEventListener('click', () => {
+                state.comparisonEnabled = !state.comparisonEnabled;
+                toggle.classList.toggle('active');
+                document.getElementById('previousPeriodSection').style.display = 
+                    state.comparisonEnabled ? 'block' : 'none';
+                updateMetricsInputs();
+            });
+        }
+
+        function setDefaultDates() {
+            const today = new Date();
+            const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            
+            document.getElementById('p1_end').valueAsDate = today;
+            document.getElementById('p1_start').valueAsDate = firstDay;
+            
+            if (state.comparisonEnabled) {
+                const prevMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
+                const prevMonthStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+                document.getElementById('p2_end').valueAsDate = prevMonthEnd;
+                document.getElementById('p2_start').valueAsDate = prevMonthStart;
+            }
+        }
+
+        // ========================
+        // METRICS INPUT GENERATION
+        // ========================
+        
+        function updateMetricsInputs() {
+            const container = document.getElementById('metricsInputContainer');
+            container.innerHTML = '';
+            
+            if (state.selectedPlatforms.length === 0) {
+                container.innerHTML = `
+                    <div class="glass" style="padding: 20px; border-radius: 8px; text-align: center;">
+                        <i class="fa-solid fa-circle-info" style="font-size: 2rem; color: var(--accent); margin-bottom: 10px;"></i>
+                        <p style="color: var(--text-muted);">Select at least one platform to enter metrics</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            state.selectedPlatforms.forEach(platformId => {
+                const platform = PLATFORMS.find(p => p.id === platformId);
+                const section = createPlatformMetricsSection(platform);
+                container.appendChild(section);
+            });
+        }
+
+        function createPlatformMetricsSection(platform) {
+            const section = document.createElement('div');
+            section.className = 'input-section glass';
+            section.style.padding = '15px';
+            section.style.borderRadius = '8px';
+            
+            let html = `
+                <h3>
+                    <i class="${platform.icon}"></i> ${platform.name} Metrics
+                </h3>
+                <h4 style="font-size:0.8rem; color:var(--accent); margin:10px 0;">Current Period</h4>
+                <div class="metric-grid">
+            `;
+            
+            platform.metrics.forEach(metricKey => {
+                const metric = METRICS_CONFIG[metricKey];
+                html += `
+                    <div class="form-group">
+                        <label>${metric.label}</label>
+                        <input type="number" 
+                               class="metric-input" 
+                               data-platform="${platform.id}" 
+                               data-period="1" 
+                               data-metric="${metricKey}"
+                               placeholder="0"
+                               step="${metric.isCurrency ? '0.01' : '1'}">
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            
+            if (state.comparisonEnabled) {
+                html += `
+                    <h4 style="font-size:0.8rem; color:var(--text-muted); margin:15px 0 10px 0;">Previous Period</h4>
+                    <div class="metric-grid">
+                `;
+                
+                platform.metrics.forEach(metricKey => {
+                    const metric = METRICS_CONFIG[metricKey];
+                    html += `
+                        <div class="form-group">
+                            <label>${metric.label}</label>
+                            <input type="number" 
+                                   class="metric-input" 
+                                   data-platform="${platform.id}" 
+                                   data-period="2" 
+                                   data-metric="${metricKey}"
+                                   placeholder="0"
+                                   step="${metric.isCurrency ? '0.01' : '1'}">
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+            }
+            
+            section.innerHTML = html;
+            return section;
+        }
+
+        // ========================
+        // DATA COLLECTION
+        // ========================
+        
+        function collectFormData() {
+            const data = {
+                client: document.getElementById('clientName').value,
+                campaign: document.getElementById('campaignName').value,
+                dates: {
+                    p1: { 
+                        start: document.getElementById('p1_start').value, 
+                        end: document.getElementById('p1_end').value 
+                    },
+                    p2: { 
+                        start: document.getElementById('p2_start').value, 
+                        end: document.getElementById('p2_end').value 
+                    }
+                },
+                platforms: {}
+            };
+            
+            state.selectedPlatforms.forEach(platformId => {
+                const platform = PLATFORMS.find(p => p.id === platformId);
+                data.platforms[platformId] = {
+                    name: platform.name,
+                    icon: platform.icon,
+                    color: platform.color,
+                    p1: {},
+                    p2: {}
+                };
+                
+                platform.metrics.forEach(metricKey => {
+                    const input1 = document.querySelector(
+                        `input[data-platform="${platformId}"][data-period="1"][data-metric="${metricKey}"]`
+                    );
+                    const input2 = document.querySelector(
+                        `input[data-platform="${platformId}"][data-period="2"][data-metric="${metricKey}"]`
+                    );
+                    
+                    data.platforms[platformId].p1[metricKey] = parseFloat(input1?.value) || 0;
+                    data.platforms[platformId].p2[metricKey] = parseFloat(input2?.value) || 0;
+                });
+            });
+            
+            return data;
+        }
+
+        // ========================
+        // CALCULATIONS
+        // ========================
+        
+        function calculateKPIs(platformData) {
+            const calc = (d) => {
+                const kpis = {};
+                
+                if (d.impressions) {
+                    kpis.engagementRate = (d.engagements / d.impressions) * 100;
+                    kpis.ctr = (d.linkClicks / d.impressions) * 100;
+                }
+                
+                if (d.linkClicks && d.adSpend) {
+                    kpis.cpc = d.adSpend / d.linkClicks;
+                }
+                
+                if (d.engagements && d.adSpend) {
+                    kpis.cpe = d.adSpend / d.engagements;
+                }
+                
+                if (d.videoPlays && d.views) {
+                    kpis.videoViewRate = (d.videoPlays / d.views) * 100;
+                }
+                
+                return kpis;
+            };
+            
+            return {
+                p1: calc(platformData.p1),
+                p2: calc(platformData.p2)
+            };
+        }
+
+        function calculateOverallMetrics(data) {
+            const overall = { p1: {}, p2: {} };
+            
+            Object.keys(METRICS_CONFIG).forEach(metricKey => {
+                overall.p1[metricKey] = 0;
+                overall.p2[metricKey] = 0;
+                
+                Object.values(data.platforms).forEach(platform => {
+                    overall.p1[metricKey] += platform.p1[metricKey] || 0;
+                    overall.p2[metricKey] += platform.p2[metricKey] || 0;
+                });
+            });
+            
+            return overall;
+        }
+
+        // ========================
+        // INSIGHTS GENERATION
+        // ========================
+        
+        function generateInsights(data, overallMetrics) {
+            const insights = [];
+            const p1 = overallMetrics.p1;
+            const p2 = overallMetrics.p2;
+            
+            // Platform performance comparison
+            if (state.selectedPlatforms.length > 1) {
+                let bestPlatform = null;
+                let bestEngagement = 0;
+                
+                state.selectedPlatforms.forEach(platformId => {
+                    const eng = data.platforms[platformId].p1.engagements;
+                    if (eng > bestEngagement) {
+                        bestEngagement = eng;
+                        bestPlatform = data.platforms[platformId].name;
+                    }
+                });
+                
+                if (bestPlatform) {
+                    insights.push(`<strong>Top Performing Platform:</strong> ${bestPlatform} led with ${formatNumber(bestEngagement)} total engagements, demonstrating strong audience connection.`);
+                }
+            }
+            
+            // Overall engagement analysis
+            if (state.comparisonEnabled && p2.engagements > 0) {
+                const engGrowth = ((p1.engagements - p2.engagements) / p2.engagements) * 100;
+                if (engGrowth > 20) {
+                    insights.push(`<strong>Exceptional Growth:</strong> Cross-platform engagements surged by ${engGrowth.toFixed(1)}%, indicating highly effective content strategy.`);
+                } else if (engGrowth < -15) {
+                    insights.push(`<strong>Engagement Decline:</strong> Overall engagements decreased by ${Math.abs(engGrowth).toFixed(1)}%. Consider A/B testing new content formats.`);
+                }
+            }
+            
+            // Budget efficiency
+            if (state.comparisonEnabled && p1.adSpend > 0 && p2.adSpend > 0) {
+                const cpc1 = p1.linkClicks ? p1.adSpend / p1.linkClicks : 0;
+                const cpc2 = p2.linkClicks ? p2.adSpend / p2.linkClicks : 0;
+                
+                if (cpc1 > 0 && cpc2 > 0) {
+                    if (cpc1 < cpc2 * 0.9) {
+                        insights.push(`<strong>Improved ROI:</strong> Cost per click decreased to ${formatCurrency(cpc1)}, showing better campaign optimization.`);
+                    } else if (cpc1 > cpc2 * 1.2) {
+                        insights.push(`<strong>Rising Costs:</strong> CPC increased to ${formatCurrency(cpc1)}. Review targeting and bid strategies.`);
+                    }
+                }
+            }
+            
+            // Video performance
+            const totalVideoPlays = p1.videoPlays || 0;
+            const totalViews = p1.views || 0;
+            if (totalVideoPlays > totalViews * 0.3) {
+                insights.push(`<strong>Video Content Success:</strong> Video content drove ${((totalVideoPlays/totalViews)*100).toFixed(0)}% of total views, confirming video as a key engagement driver.`);
+            }
+            
+            // Default insight
+            if (insights.length === 0) {
+                insights.push(`<strong>Steady Performance:</strong> Metrics remained consistent across reporting periods. Continue current strategy while testing incremental improvements.`);
+            }
+            
+            return insights.map(i => `<p>• ${i}</p>`).join('');
+        }
+
+        // ========================
+        // REPORT RENDERING
+        // ========================
+        
+        function generateReport() {
+            if (state.selectedPlatforms.length === 0) {
+                alert('Please select at least one platform');
+                return;
+            }
+            
+            const data = collectFormData();
+            const overallMetrics = calculateOverallMetrics(data);
+            
+            // Update header
+            document.getElementById('dispClient').textContent = data.client || 'Client Name';
+            document.getElementById('dispCampaign').textContent = data.campaign || 'Campaign Report';
+            document.getElementById('dispRange1').textContent = `${data.dates.p1.start} to ${data.dates.p1.end}`;
+            
+            if (state.comparisonEnabled) {
+                document.getElementById('comparisonMetaLine').style.display = 'block';
+                document.getElementById('dispRange2').textContent = `${data.dates.p2.start} to ${data.dates.p2.end}`;
+                document.getElementById('comparisonDisabledNotice').innerHTML = '';
+            } else {
+                document.getElementById('comparisonMetaLine').style.display = 'none';
+                document.getElementById('comparisonDisabledNotice').innerHTML = `
+                    <div class="comparison-disabled-notice">
+                        <i class="fa-solid fa-info-circle"></i>
+                        <strong>Note:</strong> Period comparison is disabled. Enable it in settings to see performance trends.
+                    </div>
+                `;
+            }
+            
+            // Render platform badges
+            renderPlatformBadges(data);
+            
+            // Render insights
+            document.getElementById('aiInsights').innerHTML = generateInsights(data, overallMetrics);
+            
+            // Render overall KPIs
+            renderOverallKPIs(overallMetrics);
+            
+            // Render overview chart
+            renderOverviewChart(data);
+            
+            // Render individual platform sections
+            renderPlatformSections(data);
+        }
+
+        function renderPlatformBadges(data) {
+            const container = document.getElementById('platformBadgesContainer');
+            container.innerHTML = '<div style="margin-bottom: 10px; font-size: 0.85rem; color: #64748b;">Active Platforms:</div>';
+            
+            state.selectedPlatforms.forEach(platformId => {
+                const platform = data.platforms[platformId];
+                const badge = document.createElement('span');
+                badge.className = 'platform-badge';
+                badge.style.background = platform.color;
+                badge.innerHTML = `<i class="${platform.icon}"></i> ${platform.name}`;
+                container.appendChild(badge);
+            });
+        }
+
+        function renderOverallKPIs(overallMetrics) {
+            const container = document.getElementById('overallKpiContainer');
+            container.innerHTML = '';
+            
+            const kpis = calculateKPIs(overallMetrics);
+            
+            const kpiList = [
+                { label: 'Total Impressions', value: overallMetrics.p1.impressions, format: formatNumber, compare: overallMetrics.p2.impressions },
+                { label: 'Total Engagements', value: overallMetrics.p1.engagements, format: formatNumber, compare: overallMetrics.p2.engagements },
+                { label: 'Total Ad Spend', value: overallMetrics.p1.adSpend, format: formatCurrency, compare: overallMetrics.p2.adSpend },
+                { label: 'Overall Eng. Rate', value: kpis.p1.engagementRate || 0, format: v => v.toFixed(2) + '%', compare: kpis.p2.engagementRate },
+            ];
+            
+            kpiList.forEach(kpi => {
+                container.appendChild(createKPICard(kpi));
+            });
+        }
+
+        function createKPICard(kpi) {
+            const card = document.createElement('div');
+            card.className = 'kpi-card';
+            
+            let trendHtml = '<span class="trend-neutral">-</span>';
+            
+            if (state.comparisonEnabled && kpi.compare > 0) {
+                const change = ((kpi.value - kpi.compare) / kpi.compare) * 100;
+                const isPositive = change > 0;
+                const colorClass = isPositive ? 'trend-up' : 'trend-down';
+                const icon = change > 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                trendHtml = `<span class="${colorClass}"><i class="fa-solid ${icon}"></i> ${Math.abs(change).toFixed(1)}%</span>`;
+            }
+            
+            card.innerHTML = `
+                <div class="kpi-label">${kpi.label}</div>
+                <div class="kpi-value">${kpi.format(kpi.value)}</div>
+                <div class="kpi-trend">${trendHtml}</div>
+            `;
+            
+            return card;
+        }
+
+        function renderOverviewChart(data) {
+            const ctx = document.getElementById('overviewChart').getContext('2d');
+            
+            if (chartInstances['overview']) {
+                chartInstances['overview'].destroy();
+            }
+            
+            const datasets = state.selectedPlatforms.map(platformId => {
+                const platform = data.platforms[platformId];
+                return {
+                    label: platform.name,
+                    data: [
+                        platform.p1.impressions || 0,
+                        platform.p1.engagements || 0,
+                        platform.p1.linkClicks || 0,
+                        platform.p1.adSpend || 0
+                    ],
+                    backgroundColor: platform.color,
+                    borderColor: platform.color,
+                    borderWidth: 2
+                };
+            });
+            
+            chartInstances['overview'] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Impressions', 'Engagements', 'Link Clicks', 'Ad Spend ($)'],
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        function renderPlatformSections(data) {
+            const container = document.getElementById('platformSectionsContainer');
+            container.innerHTML = '';
+            
+            state.selectedPlatforms.forEach(platformId => {
+                const platformData = data.platforms[platformId];
+                const section = createPlatformSection(platformId, platformData);
+                container.appendChild(section);
+            });
+        }
+
+        function createPlatformSection(platformId, platformData) {
+            const platform = PLATFORMS.find(p => p.id === platformId);
+            const section = document.createElement('div');
+            section.className = 'platform-section';
+            
+            const kpis = calculateKPIs(platformData);
+            
+            let html = `
+                <div class="platform-section-header">
+                    <div class="platform-section-icon" style="background: ${platformData.color}">
+                        <i class="${platformData.icon}"></i>
+                    </div>
+                    <div class="platform-section-title">
+                        <h3>${platformData.name} Performance</h3>
+                        <p>Detailed metrics breakdown for ${platformData.name}</p>
+                    </div>
+                </div>
+                
+                <div class="kpi-row">
+            `;
+            
+            // Platform-specific KPIs
+            const platformKPIs = [];
+            
+            if (platformData.p1.impressions) {
+                platformKPIs.push({
+                    label: 'Impressions',
+                    value: platformData.p1.impressions,
+                    compare: platformData.p2.impressions,
+                    format: formatNumber
+                });
+            }
+            
+            if (platformData.p1.engagements) {
+                platformKPIs.push({
+                    label: 'Engagements',
+                    value: platformData.p1.engagements,
+                    compare: platformData.p2.engagements,
+                    format: formatNumber
+                });
+            }
+            
+            if (kpis.p1.engagementRate) {
+                platformKPIs.push({
+                    label: 'Engagement Rate',
+                    value: kpis.p1.engagementRate,
+                    compare: kpis.p2.engagementRate,
+                    format: v => v.toFixed(2) + '%'
+                });
+            }
+            
+            if (platformData.p1.adSpend) {
+                platformKPIs.push({
+                    label: 'Ad Spend',
+                    value: platformData.p1.adSpend,
+                    compare: platformData.p2.adSpend,
+                    format: formatCurrency
+                });
+            }
+            
+            platformKPIs.forEach(kpi => {
+                html += createKPICard(kpi).outerHTML;
+            });
+            
+            html += '</div>';
+            
+            // Metrics table
+            html += `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            ${state.comparisonEnabled ? '<th>Previous</th>' : ''}
+                            <th>Current</th>
+                            ${state.comparisonEnabled ? '<th>Change</th>' : ''}
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            platform.metrics.forEach(metricKey => {
+                const metric = METRICS_CONFIG[metricKey];
+                const v1 = platformData.p1[metricKey] || 0;
+                const v2 = platformData.p2[metricKey] || 0;
+                
+                let changeCell = '';
+                if (state.comparisonEnabled) {
+                    let changeStr = '-';
+                    let color = '#64748b';
+                    
+                    if (v2 > 0) {
+                        const pct = ((v1 - v2) / v2) * 100;
+                        const icon = pct > 0 ? '↑' : (pct < 0 ? '↓' : '');
+                        changeStr = `${icon} ${Math.abs(pct).toFixed(1)}%`;
+                        color = pct > 0 ? '#10b981' : '#ef4444';
+                    }
+                    
+                    changeCell = `<td style="color:${color}">${changeStr}</td>`;
+                }
+                
+                const formatter = metric.isCurrency ? formatCurrency : formatNumber;
+                
+                html += `
+                    <tr>
+                        <td>${metric.label}</td>
+                        ${state.comparisonEnabled ? `<td>${formatter(v2)}</td>` : ''}
+                        <td>${formatter(v1)}</td>
+                        ${changeCell}
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            
+            section.innerHTML = html;
+            return section;
+        }
+
+        // ========================
+        // UTILITIES
+        // ========================
+        
+        function formatCurrency(val) {
+            return new Intl.NumberFormat('en-US', { 
+                style: 'currency', 
+                currency: 'USD',
+                minimumFractionDigits: 2
+            }).format(val);
+        }
+
+        function formatNumber(val) {
+            return new Intl.NumberFormat('en-US').format(Math.round(val));
+        }
+
+        // ========================
+        // PDF DOWNLOAD
+        // ========================
+        
+        function downloadPDF() {
+            const element = document.getElementById('reportSheet');
+            const btn = document.getElementById('btnDownload');
+            
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating PDF...';
+            btn.disabled = true;
+            
+            const opt = {
+                margin: 0,
+                filename: `Report_${document.getElementById('clientName').value.replace(/\s+/g, '_') || 'Client'}_${new Date().toISOString().split('T')[0]}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, logging: false },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
+        }
+
+        // ========================
+        // DEMO DATA
+        // ========================
+        
+        function loadDemoData() {
+            // Enable comparison
+            state.comparisonEnabled = true;
+            document.getElementById('comparisonToggle').classList.add('active');
+            document.getElementById('previousPeriodSection').style.display = 'block';
+            
+            // Select platforms
+            ['facebook', 'instagram', 'linkedin'].forEach(platformId => {
+                if (!state.selectedPlatforms.includes(platformId)) {
+                    togglePlatform(platformId);
+                }
+            });
+            
+            // Set basic info
+            document.getElementById('clientName').value = "TechFlow Solutions";
+            document.getElementById('campaignName').value = "Q4 Multi-Platform Growth Campaign";
+            document.getElementById('p1_start').value = '2024-10-01';
+            document.getElementById('p1_end').value = '2024-10-31';
+            document.getElementById('p2_start').value = '2024-09-01';
+            document.getElementById('p2_end').value = '2024-09-30';
+            
+            // Facebook data
+            const fbData = {
+                p1: { impressions: 45000, views: 52000, engagements: 3400, postEngagements: 1200, 
+                      videoPlays: 15000, pageLikes: 400, linkClicks: 1200, landingPageViews: 950, adSpend: 1500 },
+                p2: { impressions: 38000, views: 41000, engagements: 2800, postEngagements: 1000, 
+                      videoPlays: 11000, pageLikes: 350, linkClicks: 1100, landingPageViews: 800, adSpend: 1450 }
+            };
+            
+            // Instagram data
+            const igData = {
+                p1: { impressions: 38000, views: 42000, engagements: 4200, followers: 15200, 
+                      postEngagements: 2800, videoPlays: 18000, linkClicks: 850, adSpend: 1200 },
+                p2: { impressions: 32000, views: 35000, engagements: 3500, followers: 15000, 
+                      postEngagements: 2200, videoPlays: 14000, linkClicks: 700, adSpend: 1150 }
+            };
+            
+            // LinkedIn data
+            const liData = {
+                p1: { impressions: 12000, engagements: 980, followers: 8500, linkClicks: 420, 
+                      videoPlays: 2400, adSpend: 800 },
+                p2: { impressions: 10000, engagements: 850, followers: 8300, linkClicks: 380, 
+                      videoPlays: 2000, adSpend: 750 }
+            };
+            
+            // Fill in the data
+            setTimeout(() => {
+                fillPlatformData('facebook', fbData);
+                fillPlatformData('instagram', igData);
+                fillPlatformData('linkedin', liData);
+                generateReport();
+            }, 100);
+        }
+
+        function fillPlatformData(platformId, data) {
+            Object.keys(data.p1).forEach(metricKey => {
+                const input1 = document.querySelector(
+                    `input[data-platform="${platformId}"][data-period="1"][data-metric="${metricKey}"]`
+                );
+                const input2 = document.querySelector(
+                    `input[data-platform="${platformId}"][data-period="2"][data-metric="${metricKey}"]`
+                );
+                
+                if (input1) input1.value = data.p1[metricKey];
+                if (input2) input2.value = data.p2[metricKey];
+            });
+        }
+    </script>
+<script defer="" src="./AgencyAnalytics _ Professional Multi-Platform Report Generator_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;e3c1c9af36de41759418005494a48906&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+</body></html>
